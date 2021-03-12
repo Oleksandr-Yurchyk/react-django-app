@@ -10,3 +10,7 @@
 3. There should now be two servers running:
 - http://127.0.0.1:8000 is the Django app
 - http://127.0.0.1:3000 is the React app
+
+On the Django server you can navigate to the:
+- http://127.0.0.1:8000/users/api/ - Users api page
+- http://127.0.0.1:8000/groups/api/ - Groups api page
