@@ -1,25 +1,28 @@
-web:
-  build: .
-  volumes:
-    - .:/app
+version: '2.1'
 
-web_migrate:
-  extends:
-    service: web
-  command: python3 manage.py migrate
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
 
-web_run:
-  extends:
-    service: web
-  command: python3 manage.py runserver 0.0.0.0:8000
-  ports:
-    - "8000:8000"
+  web_migrate:
+    extends:
+      service: web
+    command: python3 manage.py migrate
 
-frontend:
-  build: ./users_fe
-  command: npm start
-  volumes:
-    - ./users_fe:/app/users_fe
-    - node-modules:/app/users_fe/node_modules
-  ports:
-    - "3000:3000"
+  web_run:
+    extends:
+      service: web
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    command: npm start
+    volumes:
+      - ./frontend:/app/frontend
+      - ./node_modules:/app/frontend/node_modules
+    ports:
+      - "3000:3000"
